@@ -3,7 +3,6 @@
  */
 package fa.dfa;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -15,26 +14,27 @@ import java.util.Set;
 import fa.State;
 
 /**
+ * Implementation of the DFAInterface representing a Deterministic Finite Automata capable of accepting a 
+ * set of states including a start state and final state(s) and transitions for each state (which are held by the states
+ * themselves) on an alphabet of symbols.
  * @author joelstarravalos
  *
  */
 public class DFA implements DFAInterface {
+	//represents set of all states (Q), HashMap for constant time access to states and linked maintenance of order
 	private LinkedHashMap<String, DFAState> states;
-//	private ArrayList<String> lstates;
+	//represents the set of final states (F) 
 	private LinkedHashMap<String, DFAState> finals;
-//	private ArrayList<String> lfinals;
+	//respresents start state (q0)
 	private DFAState start;
-//	private HashMap<String , > transitions;
+	//LinkedHashSet representing the set of symbols (Sigma), linked for maintenance of order
 	private LinkedHashSet<Character> alphabet;
 	
 	public DFA() {
 		states = new LinkedHashMap<String, DFAState>();
 		finals = new LinkedHashMap<String, DFAState>();
-//		lstates = new ArrayList<String>();
-//		lfinals = new ArrayList<String>();
 		alphabet = new LinkedHashSet<Character>();
 		alphabet.add('e');
-//		transitions = new HashMap<String, HashMap<Character, String>>();
 	}
 	/**
 	 * Adds the initial state to the DFA instance
@@ -44,7 +44,6 @@ public class DFA implements DFAInterface {
 	public void addStartState(String name) {
 		start = new DFAState(name);
 		states.put(name, start);
-//		lstates.add(name);
 	}
 	
 	/**
@@ -62,7 +61,6 @@ public class DFA implements DFAInterface {
 	@Override
 	public void addState(String name) {
 		states.put(name, new DFAState(name));
-//		lstates.add(name);
 	}
 	
 	/**
@@ -71,7 +69,6 @@ public class DFA implements DFAInterface {
 	 */
 	private void addState(DFAState state) {
 		states.put(state.getName(), state);
-//		lstates.add(state.getName());
 	}
 
 	/**
@@ -93,7 +90,6 @@ public class DFA implements DFAInterface {
 	public void addFinalState(DFAState state) {
 		finals.put(state.getName(), state);
 		states.put(state.getName(), state);
-//		lstates.add(state.getName());
 	}
 	
 	/**
@@ -143,17 +139,6 @@ public class DFA implements DFAInterface {
 		return start;
 	}
 
-	/**
-	 * Creates the alphabet from the transition HashMap
-	 */
-//	public void buildSigma() {
-//		for (HashMap.Entry<String, HashMap<Character, String>> fromState : transitions.entrySet()) {
-//			for (HashMap.Entry<Character, String> toState : fromState.getValue().entrySet() ) {
-//				alphabet.add(toState.getKey());
-//			}
-//		}
-//		alphabet.add('e');
-//	}
 	
 	/**
 	 * Getter for Sigma
